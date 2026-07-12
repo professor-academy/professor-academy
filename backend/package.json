@@ -1,0 +1,23 @@
+{
+  "name": "professor-academy-backend",
+  "version": "1.0.0",
+  "description": "Backend CMS and Telegram Bot for Professor Academy (Saudi Curriculum)",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "nodemon server.js",
+    "validate": "node scripts/validate.js"
+  },
+  "dependencies": {
+    "ajv": "^8.12.0",
+    "ajv-formats": "^2.1.1",
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.7",
+    "express": "^4.19.2",
+    "helmet": "^7.1.0",
+    "telegraf": "^4.16.3"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.0"
+  }
+}

@@ -1,0 +1,14 @@
+{
+  "name": "professor-academy",
+  "version": "1.0.0",
+  "description": "منصة أكاديمية الأستاذ للمنهج السعودي - الباكيند الموحد وبوت تليجرام",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^4.19.2",
+    "telegraf": "^4.16.3"
+  }
+}
