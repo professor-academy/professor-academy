@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>أكاديمية الأستاذ - شرح الدرس</title>
+
+    <!-- Preconnect للخطوط -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800&display=swap" rel="stylesheet" />
+
+    <!-- CSS الرئيسي -->
+    <link rel="stylesheet" href="../../assets/css/main.css" />
+    <link rel="stylesheet" href="../../assets/css/components/study-viewer.css" />
+
+    <!-- Meta Tags للـ SEO و Open Graph -->
+    <meta property="og:title" content="أكاديمية الأستاذ - شرح الدرس" />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://professor-academy.github.io/frontend/pages/Study/" />
+    <meta name="description" content="منصة تعليمية للمناهج السعودية - شرح مبسط للدروس" />
+</head>
+<body>
+
+    <!-- ============================================ -->
+    <!-- 1. شريط التنقل العلوي (Navbar)                -->
+    <!-- ============================================ -->
+    <header class="navbar" role="navigation" aria-label="شريط التنقل الرئيسي">
+        <div class="navbar__container">
+            <a href="../../index.html" class="navbar__brand" aria-label="الرئيسية">
+                <span class="navbar__logo">🇸🇦</span>
+                <span class="navbar__title">أكاديمية الأستاذ</span>
+            </a>
+            <button class="navbar__toggle" id="navbarToggle" aria-expanded="false" aria-controls="navbarMenu">
+                <span class="navbar__hamburger"></span>
+            </button>
+            <ul class="navbar__menu" id="navbarMenu" role="menubar">
+                <li role="none"><a href="../../index.html" role="menuitem">🏠 الرئيسية</a></li>
+                <li role="none"><a href="../Study/" role="menuitem" class="active">📖 الدروس</a></li>
+                <li role="none"><a href="../Quiz/" role="menuitem">📝 الاختبارات</a></li>
+                <li role="none"><a href="../About/" role="menuitem">ℹ️ عن الأكاديمية</a></li>
+                <li role="none"><a href="../Contact/" role="menuitem">📞 تواصل معنا</a></li>
+            </ul>
+        </div>
+    </header>
+
+    <!-- ============================================ -->
+    <!-- 2. محتوى الدرس الرئيسي                       -->
+    <!-- ============================================ -->
+    <main class="study-viewer" id="studyViewer" role="main">
+        <div class="study-viewer__container">
+
+            <!-- مسار التنقل (Breadcrumb) -->
+            <nav class="breadcrumb" aria-label="مسار الصفحة">
+                <ol class="breadcrumb__list">
+                    <li><a href="../../index.html">الرئيسية</a></li>
+                    <li><a href="../Study/">الدروس</a></li>
+                    <li class="breadcrumb__current" id="breadcrumbCurrent">الصف الخامس - العلوم</li>
+                </ol>
+            </nav>
+
+            <!-- محتوى الدرس -->
+            <article class="lesson" id="lessonContainer">
+                <!-- سيتم حقن المحتوى ديناميكياً عبر JavaScript -->
+                <div class="lesson__loader" id="lessonLoader">
+                    <div class="loader"></div>
+                    <p>جاري تحميل الدرس...</p>
+                </div>
+                <div class="lesson__content" id="lessonContent" style="display: none;">
+                    <!-- العنوان -->
+                    <header class="lesson__header">
+                        <h1 class="lesson__title" id="lessonTitle">عنوان الدرس</h1>
+                        <div class="lesson__meta">
+                            <span class="lesson__grade" id="lessonGrade">الصف الخامس</span>
+                            <span class="lesson__subject" id="lessonSubject">العلوم</span>
+                            <span class="lesson__unit" id="lessonUnit">الوحدة الأولى</span>
+                        </div>
+                    </header>
+
+                    <!-- الفيديو (إن وجد) -->
+                    <section class="lesson__video" id="lessonVideo">
+                        <div class="video-wrapper">
+                            <iframe id="videoIframe" src="" frameborder="0" allowfullscreen allow="autoplay; encrypted-media" loading="lazy"></iframe>
+                        </div>
+                    </section>
+
+                    <!-- الأهداف -->
+                    <section class="lesson__objectives" id="lessonObjectives">
+                        <h2>🎯 أهداف التعلم</h2>
+                        <ul id="objectivesList"></ul>
+                    </section>
+
+                    <!-- المحتوى النصي -->
+                    <section class="lesson__body" id="lessonBody">
+                        <h2>📖 شرح الدرس</h2>
+                        <div class="lesson__text" id="lessonText"></div>
+                    </section>
+
+                    <!-- الأمثلة المحلولة -->
+                    <section class="lesson__examples" id="lessonExamples">
+                        <h2>✏️ أمثلة محلولة</h2>
+                        <div id="examplesContainer"></div>
+                    </section>
+
+                    <!-- الملخص -->
+                    <section class="lesson__summary" id="lessonSummary">
+                        <h2>📌 ملخص الدرس</h2>
+                        <div class="summary__content" id="summaryContent"></div>
+                    </section>
+
+                    <!-- أسئلة تدريبية سريعة (اختيارية) -->
+                    <section class="lesson__quick-questions" id="quickQuestions">
+                        <h2>🧠 أسئلة سريعة</h2>
+                        <div id="quickQuestionsContainer"></div>
+                    </section>
+
+                    <!-- أزرار التنقل -->
+                    <footer class="lesson__navigation">
+                        <button class="btn btn--secondary" id="prevLessonBtn" aria-label="الدرس السابق">
+                            ⬅️ الدرس السابق
+                        </button>
+                        <a href="../Study/" class="btn btn--outline">📚 العودة للقائمة</a>
+                        <button class="btn btn--primary" id="nextLessonBtn" aria-label="الدرس التالي">
+                            الدرس التالي ➡️
+                        </button>
+                    </footer>
+                </div>
+            </article>
+
+            <!-- رسائل الأخطاء -->
+            <div class="toast-container" id="toastContainer" aria-live="polite"></div>
+        </div>
+    </main>
+
+    <!-- ============================================ -->
+    <!-- 3. تذييل الصفحة (Footer)                    -->
+    <!-- ============================================ -->
+    <footer class="footer" role="contentinfo">
+        <div class="footer__container">
+            <p class="footer__copyright">© 2026 <strong>أكاديمية الأستاذ</strong> - بالعلم والإيمان ترقى الأمم 🇸🇦</p>
+            <div class="footer__social">
+                <a href="#" aria-label="واتساب">📱</a>
+                <a href="#" aria-label="تيليجرام">✈️</a>
+                <a href="#" aria-label="فيسبوك">📘</a>
+                <a href="#" aria-label="البريد الإلكتروني">✉️</a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- ============================================ -->
+    <!-- 4. JavaScript (ES Modules)                  -->
+    <!-- ============================================ -->
+    <script type="module">
+        // استيراد المحركات والخدمات من الهيكل الجديد
+        import { globalEventBus } from '../../assets/js/core/event-bus.js';
+        import { ErrorHandler } from '../../assets/js/core/errors.js';
+        import { StudyEngine } from '../../assets/js/engines/study-engine.js';
+        import { RenderEngine } from '../../assets/js/engines/render-engine.js';
+        import { NavigationService } from '../../assets/js/services/navigation.js';
+
+        (async function initStudyPage() {
+            try {
+                // 1. قراءة معاملات الرابط (grade و subject)
+                const urlParams = new URLSearchParams(window.location.search);
+                const gradeId = urlParams.get('grade') || 'p5';
+                const subjectId = urlParams.get('subject') || 'science';
+                const lessonId = urlParams.get('lesson') || null; // اختياري
+
+                // 2. تحديث مسار التنقل (Breadcrumb)
+                const breadcrumb = document.getElementById('breadcrumbCurrent');
+                if (breadcrumb) {
+                    breadcrumb.textContent = `الصف ${gradeId} - ${subjectId}`;
+                }
+
+                // 3. تحميل بيانات الدرس عبر StudyEngine
+                const lessonData = await StudyEngine.loadLesson(gradeId, subjectId, lessonId);
+
+                if (!lessonData) {
+                    throw new Error('تعذر تحميل بيانات الدرس. يرجى التحقق من اتصالك بالإنترنت.');
+                }
+
+                // 4. عرض المحتوى باستخدام RenderEngine
+                const contentContainer = document.getElementById('lessonContent');
+                const loader = document.getElementById('lessonLoader');
+
+                RenderEngine.renderLesson(contentContainer, lessonData);
+
+                // 5. إخفاء الـ Loader وإظهار المحتوى
+                loader.style.display = 'none';
+                contentContainer.style.display = 'block';
+
+                // 6. تفعيل أزرار التنقل
+                NavigationService.setupLessonNavigation(
+                    document.getElementById('prevLessonBtn'),
+                    document.getElementById('nextLessonBtn'),
+                    gradeId,
+                    subjectId,
+                    lessonData
+                );
+
+                // 7. بث حدث تحميل الدرس (للتتبع أو الإحصائيات)
+                globalEventBus.publish('lesson:loaded', {
+                    grade: gradeId,
+                    subject: subjectId,
+                    lesson: lessonData.id,
+                    title: lessonData.title
+                });
+
+            } catch (error) {
+                ErrorHandler.handle(error);
+                // عرض رسالة للمستخدم
+                const container = document.getElementById('lessonContainer');
+                if (container) {
+                    container.innerHTML = `
+                        <div class="error-message">
+                            <h3>⚠️ عذراً، حدث خطأ</h3>
+                            <p>${error.message || 'تعذر تحميل الدرس. يرجى المحاولة مرة أخرى.'}</p>
+                            <a href="../../index.html" class="btn btn--primary">🏠 العودة للرئيسية</a>
+                        </div>
+                    `;
+                }
+            }
+        })();
+    </script>
+</body>
+</html>
